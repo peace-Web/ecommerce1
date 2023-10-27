@@ -1,0 +1,70 @@
+{% extends "home.html" %}
+
+{% block content %}
+{% include "nav/nav.html" %}
+
+<div class="container my-5">
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table">
+          {% for msg in messages %}
+          <p>{{msg}}</p>
+          {% endfor %}
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          {% if cart %}
+          {% for item in cart %}
+          <tbody>
+            <tr>
+              <td>{{item.product.name}}</td>
+              <td>$ {{item.product.selling_price}}</td>
+              <td><input type="number" value="{{item.quantity}}" min="1" class="form-control"></td>
+              <td> $ {{item.total_price}}</td>
+              <td>
+                <form id="delete" method="POST">
+                  {% csrf_token %}
+                <input type="hidden" id="prod_id" value="{{item.product.id}}">
+                <!-- <td><button class="btn btn-sm btn-danger" id="delete"><i class="bi bi-trash"></i>Delete</button></td> -->
+                <input type="submit" class="btn btn-sm btn-danger"  value="Deleto">
+                </form>
+                <!-- <td><button class="btn btn-sm btn-danger" ><i class="bi bi-trash"></i><a href="">Delete</a> </button></td> -->
+              </td>
+              
+              
+            </tr>
+          </tbody>
+          {% endfor %}
+          <tfoot>
+            <tr>
+              <td colspan="3"></td>
+              <td><strong>Total:</strong></td>
+              <td>$ {{total}}</td>
+            </tr>
+          </tfoot>
+          {% else %}
+          <h2>Your Cart Is Empty</h2>
+          {% endif%}
+        </table>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Order Summary</h5>
+            <p class="card-text">Subtotal: $ {{total}}</p>
+            <p class="card-text">Shipping: $0.00</p>
+            <p class="card-text">Tax: $0.00</p>
+            <h6 class="card-subtitle mb-2">Total: ${{total}}</h6>
+            <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

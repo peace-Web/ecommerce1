@@ -1,0 +1,68 @@
+
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+{% include 'nav/nav.html' %}
+
+
+    <div class="container row m-3">
+        <div class="col-md-3">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Profile</h3>
+                </div>
+                <div class="card-body">
+                    {{customer.caption}}
+                    {% if customer.image %}
+                    <form action="dashboard" method="POST">
+                        <img class="profile-image" src="{{ user.profile_image.url }}" alt="{{ user.username }}'s profile image">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text">{{ user.email }}</p>
+                        <a href="#" class="btn btn-primary">Edit Profile</a>
+                   </form>
+                   {% else %}
+                   <img style="max-width: 80px;
+                   border: 1px solid black;
+                   border-radius: 50%;" class="profile-image user-profile" src="{% static 'images/user-logo.png' %}" alt="{{ user.username }}'s profile image">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">{{ user.email }}</p>
+                    <a href="{% url 'editprofile' %}" class="btn btn-primary">Edit Profile</a>
+
+                    {% endif %}
+                    
+                </div>
+            </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Navigation</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logOut' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Dashboard</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Add your content here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+{% block content %}
+{% include 'nav/nav.html' %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-center">User Profile</h4>
+
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="editprofile">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="first_name">First name</label>
+                            <input type="text" placeholder="first name..." class="form-control" id="first_name" name="first_name" value="{{user.first_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last name</label>
+                            <input type="text" placeholder="last name..." class="form-control" id="last_name" name="last_name" value={{user.last_name}}>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" required placeholder="username..." disabled class="form-control" id="username" name="username" value={{user.username}}>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" placeholder="email..." class="form-control" id="email" name="email" value="{{user.email}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_pic">Profile Picture</label>
+                            <input type="file" placeholder="profile picture..." class="form-control" id="profile_pic" name="profile_pic" value="{{customer.image}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="caption">Caption</label>
+                            <textarea class="form-group" placeholder="Edit a caption about yourself..." name="caption" value="{{customer.caption}}" id="caption" cols="30" rows="2"></textarea>
+                    
+                        </div>
+                        <br>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                        
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+</div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+{% block content %}
+{% include 'nav/nav.html' %}
+
+<div class="container">
+    {% if products %}
+<h3 class="text-center m-2">Results Found</h3>
+<div class="row">
+    {% for item in products %}
+<div  class="card col-md-3 m-2" style="width: 18rem;">
+    <img src="{{item.image.url}}" class="card-img-top" alt="product image">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text">{{item.small_description}}</p>
+      <a href="{% url 'description' item.id %}" class="btn btn-primary">View Product</a>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+{% endif %}
+
+</div>
+{% endblock content %}

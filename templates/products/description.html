@@ -1,0 +1,44 @@
+{% extends 'home.html' %}
+
+
+
+
+{% block content %}
+{% include "nav/nav.html" %}
+
+<div class="container mt-3 ">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-md-6">
+        <!-- Product image -->
+        <img src="{{product.image.url}}" alt="Product Image" class="img-fluid rounded">
+      </div>
+      <div class="col-md-6">
+        <!-- Product details -->
+        <h2>{{product.name}}</h2>
+        <p>{{product.description}}</p>
+        <ul>
+          <li>Feature 1</li>
+          <li>Feature 2</li>
+          <li>Feature 3</li>
+          <li>Feature 4</li>
+        </ul>
+        <p class="selling_price">$ {{product.selling_price}}</p>
+        <p class="original_price">$ <del>  {{product.original_price}}</del> </p>
+        
+        <form id="post-form" method="POST">
+          {% csrf_token %}
+          <input id="quantity" value="1" type="number" min="0">
+          <input id="product_id" type="hidden" value="{{product.id}}">
+        
+        
+        
+        <input type="submit" class="btn btn-primary" value="Add To Card">
+      </form>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
+{% endblock content %}
